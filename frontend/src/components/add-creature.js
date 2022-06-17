@@ -3,7 +3,7 @@ import React from "react";
 function AddCreature() {
   return (
     <div className="App">
-      Add creature
+      Add a creature here
     </div>
   );
 }

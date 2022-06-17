@@ -9,9 +9,9 @@ router.route("/id/:id").get(CreaturesCtrl.apiGetCreatureById)
 router.route("/metas").get(CreaturesCtrl.apiGetCreatureMetas)
 
 //allows modification of creatures
-.post(CreaturesCtrl.apiPostCreature)
-.put(CreaturesCtrl.apiUpdateCreature)
-.delete(CreaturesCtrl.apiDeleteCreature)
+router.route("/").post(CreaturesCtrl.apiPostCreature)
+router.route("/").put(CreaturesCtrl.apiUpdateCreature)
+router.route("/").delete(CreaturesCtrl.apiDeleteCreature)
 
 //should allow user to copy a creature and add modifications
 

@@ -159,11 +159,12 @@ export default class CreaturesDAO{
     static async deleteCreature(creatureId) {
   
       try {
+        console.log("the creature id is " + creatureId);
         const deleteResponse = await creatures.deleteOne({
           _id: ObjectId(creatureId),
           
         })
-  
+   
         return deleteResponse
       } catch (e) {
         console.error(`Unable to delete creature: ${e}`)

@@ -4,10 +4,10 @@ import { Switch, Route, Link } from "react-router-dom"; //Using react router to 
 import "bootstrap/dist/css/bootstrap.min.css"; //Used to style the app 
 import {BrowserRouter} from "react-router-dom";
 
-import Login from "./components/login";
+import AddCreature from "./components/add-creature";
 import CreaturesList from "./components/creatures-list";
 import Creature from "./components/creatures";
-import AddCreature from "./components/add-creature";
+import Login from "./components/login";
 
 function App() {
   //TODO: This is just a dummy login system, set the user to the details. Implement with full system later. Maybe Google sign in or Oath later
@@ -58,7 +58,7 @@ function App() {
           <Route 
             path="/creatures/:id/"
             render={(props) => (
-              <AddCreature {...props} user={user} />
+              <Creature {...props} user={user} />
             )}
           />
           <Route 

@@ -107,7 +107,7 @@ const CreaturesList = props => {
           <select onChange={onChangeSearchMeta}>
              {metas.map(meta => {
                return (
-                 <option value={meta}> {meta.substring(0, 20)} </option>
+                 <option value={meta}> {meta.substring(0, 50)} </option>
                )
              })}
           </select>
@@ -135,14 +135,10 @@ const CreaturesList = props => {
                     <strong>Meta: </strong>{creature.meta}<br/>
                     <img src= {""+creature.img_url} width="300" height="300"/>
                   </p>
-                  <div className="row">
+                  <div className="row">                   
                   <Link to={"/creatures/"+creature._id} className="btn btn-primary col-lg-5 mx-1 mb-1">
-                    View Details
-                  </Link>                 
-                  {/*   <a href= {""+creature.img_url} className="btn btn-primary col-lg-5 mx-1 mb-1">
-                    View Image
-                    </a> */}               
-                    
+                  View Details
+                  </Link>
                   </div>
                 </div>
               </div>

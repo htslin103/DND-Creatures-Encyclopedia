@@ -51,8 +51,8 @@ export default class CreaturesController {
       //replace this with a class later. For some reason putting this in a function didn't work
       const creatureInfo = {
         name: req.body.name,
-        meta: req.body.meta,
-        ArmorClass: req.body.ArmorClass,
+  /*        meta: req.body.meta,
+       ArmorClass: req.body.ArmorClass,
         HitPoints: req.body.HitPoints,
         Speed: req.body.Speed,
         STR: req.body.STR,
@@ -76,7 +76,7 @@ export default class CreaturesController {
         Traits: req.body.Traits,
         Actions: req.body.Actions,
         LegendaryActions: req.body.LegendaryActions,
-        img_url: req.body.img_url, 
+        img_url: req.body.img_url,  */
       }
       const CreatureResponse = await CreaturesDAO.addCreature(
         creatureInfo
@@ -143,7 +143,7 @@ export default class CreaturesController {
     try {
       const creatureId = req.query.creatureId
       //normally you would need better authentication
-      
+      console.log(creatureId)
       const creatureResponse = await CreaturesDAO.deleteCreature(
         creatureId
       )
