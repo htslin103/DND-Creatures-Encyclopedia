@@ -49,10 +49,10 @@ export default class CreaturesController {
       //This is how we get the object from Postman 
       
       //replace this with a class later. For some reason putting this in a function didn't work
-      const creatureInfo = {
+  /*     const creatureInfo = {
         name: req.body.name,
-  /*        meta: req.body.meta,
-       ArmorClass: req.body.ArmorClass,
+        meta: req.body.meta,
+        ArmorClass: req.body.ArmorClass,
         HitPoints: req.body.HitPoints,
         Speed: req.body.Speed,
         STR: req.body.STR,
@@ -76,10 +76,42 @@ export default class CreaturesController {
         Traits: req.body.Traits,
         Actions: req.body.Actions,
         LegendaryActions: req.body.LegendaryActions,
-        img_url: req.body.img_url,  */
-      }
-      const CreatureResponse = await CreaturesDAO.addCreature(
-        creatureInfo
+        img_url: req.body.img_url, 
+      } */
+      
+      //from creaturesDAO
+      const creatureDoc = {
+          name : creatureInfo.name,
+          meta : creatureInfo.meta,
+          "Armor Class" : creatureInfo.ArmorClass,
+          "Hit Points" : creatureInfo.HitPoints,
+          Speed : creatureInfo.Speed,
+          STR : creatureInfo.STR,
+          STR_mod : creatureInfo.STR_mod,
+          DEX : creatureInfo.DEX,
+          DEX_mod : creatureInfo.DEX_mod,
+          CON : creatureInfo.CON,
+          CON_mod : creatureInfo.CON_mod,
+          INT : creatureInfo.INT,
+          INT_mod : creatureInfo.INT_mod,
+          WIS : creatureInfo.WIS,
+          WIS_mod : creatureInfo.WIS_mod,
+          CHA : creatureInfo.CHA,
+          CHA_mod : creatureInfo.CHA_mod,
+          "Saving Throws": creatureInfo.SavingThrows,
+          Skills: creatureInfo.Skills,
+          "Damage Immunities" : creatureInfo.DamageImmunities,
+          Senses : creatureInfo.Senses,
+          Languages : creatureInfo.Languages,
+          Challenge : creatureInfo.Challenge,
+          Traits : creatureInfo.Traits,
+          Actions : creatureInfo.Actions,
+          "Legendary Actions" : creatureInfo.LegendaryActions,
+          img_url : creatureInfo.img_url,              
+        } 
+      
+      const CreatureResponse = await CreaturesDAO.addCreature(creatureDoc
+        //creatureInfo 
       )
       res.json({ status: "successfully added the creature" })
     } catch (e) {
@@ -141,17 +173,15 @@ export default class CreaturesController {
 
   static async apiDeleteCreature(req, res, next){
     try {
-      const creatureId = req.query.creatureId
+      const creatureId = req.query.id
       //normally you would need better authentication
-      console.log(creatureId)
       const creatureResponse = await CreaturesDAO.deleteCreature(
         creatureId
       )
-      res.json({ status: "successfully deleted the creature" })
+      res.json({ status: "Request successfully sent" })
     } catch (e) {
       res.status(500).json({ error: e.message })
     }
-
   }
 
     
@@ -160,7 +190,7 @@ export default class CreaturesController {
       let id = req.params.id || {}
       let creature = await CreaturesDAO.getCreatureByID(id)
       if (!creature) {
-        res.status(404).json({ error: "Not creatures were found" })
+        res.status(404).json({ error: "No creatures were found" })
         return
       }
       res.json(creature)

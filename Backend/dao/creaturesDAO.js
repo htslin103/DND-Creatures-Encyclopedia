@@ -1,6 +1,7 @@
 import { Console } from "console"
 import mongodb from "mongodb"
 const ObjectId = mongodb.ObjectId
+import { Creature } from '../classes/creature.js'
 
 let creatures
 
@@ -72,8 +73,13 @@ export default class CreaturesDAO{
         //This section will need to resemble the database fields 
     static async addCreature(creatureInfo)
     {
-      try{           
-        const creatureDoc = {
+      //maybe we can just receive the creatureInfo here as the Creature object
+      try{         
+        console.log(creatureInfo);
+        let creatureDoc = new Creature();
+        creatureDoc = Object.assign(creatureDoc, creatureInfo);
+        return console.log(creatureDoc);
+        /* const creatureDoc = {
           name : creatureInfo.name,
           meta : creatureInfo.meta,
           "Armor Class" : creatureInfo.ArmorClass,
@@ -101,16 +107,16 @@ export default class CreaturesDAO{
           Actions : creatureInfo.Actions,
           "Legendary Actions" : creatureInfo.LegendaryActions,
           img_url : creatureInfo.img_url,              
-        }
+        } */
         
-      return await creatures.insertOne(creatureDoc)
+        return await creatures.insertOne(creatureDoc)    
   
       }catch(e){
         console.error(`Unable to post creature: ${e}`)
         return {error:e}
       }
     }    
-    
+   
     static async updateCreature(creatureInfo) {
       try {
         const updateResponse = await creatures.updateOne(
@@ -159,13 +165,11 @@ export default class CreaturesDAO{
     static async deleteCreature(creatureId) {
   
       try {
-        console.log("the creature id is " + creatureId);
         const deleteResponse = await creatures.deleteOne({
-          _id: ObjectId(creatureId),
-          
+          _id: ObjectId(creatureId),    
         })
-   
-        return deleteResponse
+      return deleteResponse
+         
       } catch (e) {
         console.error(`Unable to delete creature: ${e}`)
         return { error: e }
@@ -173,7 +177,6 @@ export default class CreaturesDAO{
     }
 
       //Get creature by id
-      //TODO find out how to do this simply 
     static async getCreatureByID(id) {
       
       try {       
